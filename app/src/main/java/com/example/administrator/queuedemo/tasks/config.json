@@ -1,0 +1,29 @@
+
+{
+  "type" : "toast" ,
+  "toast": "测试吐司" ,
+  "alert": {
+    "title": "测试标题",
+    "content": "这是内容2333",
+    "ok":{
+      "text": "确认哈哈",
+      "action": "action ok"
+    },
+    "cancel":{
+      "text": "取消哈哈",
+      "action": "action cancel"
+    }
+  } ,
+  "h5": {
+    "id" : "djiedawdw",
+    "width": "20dp",
+    "height": "40dp",
+    "x": "50dp",
+    "y": "70dp",
+    "z": "3",
+    "url": "https://www.baidu.com",
+    "data":"",
+    "clickable":"false"
+  }
+
+}
