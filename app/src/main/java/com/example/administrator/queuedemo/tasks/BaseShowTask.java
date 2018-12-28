@@ -1,15 +1,12 @@
 package com.example.administrator.queuedemo.tasks;
 
 import android.content.Context;
-import android.support.annotation.CallSuper;
 import android.util.Log;
-
 import com.example.administrator.queuedemo.config.CurrentShowingTask;
 import com.example.administrator.queuedemo.config.TaskPriority;
 import com.example.administrator.queuedemo.interf.IShowTask;
 import com.example.administrator.queuedemo.scheduler.ShowTaskQueue;
 import com.example.administrator.queuedemo.scheduler.TaskScheduler;
-
 import java.lang.ref.WeakReference;
 
 /**
@@ -36,8 +33,9 @@ public abstract class BaseShowTask implements IShowTask {
     private final String TAG = getClass().getSimpleName();
 
     @Override
-    public void setPriority(TaskPriority mTaskPriority) {
+    public BaseShowTask setPriority(TaskPriority mTaskPriority) {
         this.mTaskPriority = mTaskPriority;
+        return this;
     }
 
     @Override
@@ -70,13 +68,11 @@ public abstract class BaseShowTask implements IShowTask {
     }
 
     @Override
-    @CallSuper
     public void enqueue(){
         TaskScheduler.getInstance().enqueue(this);
     }
 
     @Override
-    @CallSuper
     public  void show(){
         mShowStatus = true;
         if(getPriority() == TaskPriority.IMMEDIATELY)
@@ -84,7 +80,6 @@ public abstract class BaseShowTask implements IShowTask {
     }
 
     @Override
-    @CallSuper
     public void dismiss() {
         this.mShowStatus = false;
         this.taskQueue.get().remove(this);

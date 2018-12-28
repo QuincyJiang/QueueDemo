@@ -2,10 +2,9 @@ package com.example.administrator.queuedemo.tasks;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
-import com.example.administrator.queuedemo.R;
 import com.example.administrator.queuedemo.scheduler.ShowTaskQueue;
 
 import java.lang.ref.WeakReference;
@@ -35,23 +34,7 @@ public class ShowAlertTask extends BaseShowTask {
     @Override
     public void show() {
         super.show();
-        AlertDialog.Builder builder = new AlertDialog.Builder(context.get());
-        builder.setTitle(title);
-        builder.setMessage(getSequence()+getPriority().toString());
-        builder.setIcon(R.mipmap.ic_launcher_round);
-        builder.setCancelable(true);
-        builder.setPositiveButton("是的", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        builder.setNegativeButton("不是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        mDialog = builder.create();
-        mDialog.show();
+        Log.d("ShowTask","Task is showing..."+toString());
     }
 
     @Override

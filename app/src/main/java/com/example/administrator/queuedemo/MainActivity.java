@@ -1,6 +1,5 @@
 package com.example.administrator.queuedemo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +14,8 @@ import com.squareup.leakcanary.RefWatcher;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bt1;
     Button bt2;
+    Button bt3;
+    Button bt4;
     private ShowTaskQueue taskQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         bt1 = findViewById(R.id.bt_1);
         bt2 = findViewById(R.id.bt_2);
+        bt3 = findViewById(R.id.bt_3);
+        bt4 = findViewById(R.id.bt_4);
+        bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
+        bt3.setOnClickListener(this);
+        bt4.setOnClickListener(this);
         taskQueue = ShowTaskQueue.getInstance();
         bt1.setOnClickListener(this);
     }
@@ -30,40 +36,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_1:
-                addTask();
+                addImmediately();
                 break;
             case R.id.bt_2:
-                Intent intent = new Intent(this,Main2Activity.class);
-                startActivity(intent);
+                addHigh();
+                break;
+            case R.id.bt_3:
+                addmiddle();
+                break;
+            case R.id.bt_4:
+                addlow();
+                break;
+                default:
         }
     }
-
-    private void addTask(){
-         ShowAlertTask task1 = new ShowAlertTask(taskQueue,this,"low","23333333",1);
-//        task1.setPriority(TaskPriority.LOW);
-        ShowAlertTask task2 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-//        task2.setPriority(TaskPriority.DEFAULT);
-        ShowAlertTask task3 = new ShowAlertTask(taskQueue,this,"high","23333333",1);
-//        task3.setPriority(TaskPriority.HIGH);
-        ShowAlertTask task4 = new ShowAlertTask(taskQueue,this,"immediately","23333333",1);
-        ShowAlertTask task5 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-        ShowAlertTask task6 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-        ShowAlertTask task7 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-        ShowAlertTask task8 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-        ShowAlertTask task9 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-        ShowAlertTask task10 = new ShowAlertTask(taskQueue,this,"default","23333333",1);
-
-        task4.setPriority(TaskPriority.IMMEDIATELY);
-        task10.enqueue();
-        task9.enqueue();
-        task8.enqueue();
-        task7.enqueue();
-        task6.enqueue();
-        task5.enqueue();
-        task4.enqueue();
-        task3.enqueue();
-        task2.enqueue();
-        task1.enqueue();
+    private void addImmediately(){
+        new ShowAlertTask(taskQueue,this,"immediately","23333333",1).setPriority(TaskPriority.IMMEDIATELY).enqueue();
+    }
+    private void addHigh(){
+        new ShowAlertTask(taskQueue,this,"high","23333333",1).setPriority(TaskPriority.HIGH).enqueue();
+    }
+    private void addmiddle(){
+        new ShowAlertTask(taskQueue,this,"middle","23333333",1).setPriority(TaskPriority.DEFAULT).enqueue();
+    }
+    private void addlow(){
+        new ShowAlertTask(taskQueue,this,"low","23333333",1).setPriority(TaskPriority.LOW).enqueue();
     }
 
     @Override

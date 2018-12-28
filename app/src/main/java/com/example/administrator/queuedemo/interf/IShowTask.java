@@ -11,7 +11,7 @@ public interface IShowTask extends Comparable<IShowTask>{
     void enqueue();
     void show();
     void dismiss();
-    void setPriority(TaskPriority mTaskPriority);
+    IShowTask setPriority(TaskPriority mTaskPriority);
     TaskPriority getPriority();
     // 当优先级相同 按照插入顺序 先入先出 该方法用来标记插入顺序
     void setSequence(int mSequence);
