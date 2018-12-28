@@ -5,8 +5,6 @@ import android.util.Log;
 import com.example.administrator.queuedemo.config.CurrentShowingTask;
 import com.example.administrator.queuedemo.interf.IShowTask;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -44,7 +42,7 @@ public class ShowTaskExecutor {
                         showEvent.setEventType(TaskEvent.EventType.SHOW);
                         emitter.onNext(showEvent);
                         try {
-                            TimeUnit.SECONDS.sleep(iTask.getDuration());
+                            iTask.lock();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

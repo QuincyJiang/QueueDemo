@@ -2,12 +2,15 @@ package com.example.administrator.queuedemo.tasks;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.example.administrator.queuedemo.config.CurrentShowingTask;
 import com.example.administrator.queuedemo.config.TaskPriority;
 import com.example.administrator.queuedemo.interf.IShowTask;
 import com.example.administrator.queuedemo.scheduler.ShowTaskQueue;
 import com.example.administrator.queuedemo.scheduler.TaskScheduler;
+
 import java.lang.ref.WeakReference;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * Created by QuincyJiang at 2018/10/8 .
@@ -31,11 +34,19 @@ public abstract class BaseShowTask implements IShowTask {
     protected String confirmButton = "Confirm";
     protected String cancelButton = "Cancel";
     private final String TAG = getClass().getSimpleName();
+    private PriorityBlockingQueue<Integer> lock = new PriorityBlockingQueue<>();
 
     @Override
     public BaseShowTask setPriority(TaskPriority mTaskPriority) {
         this.mTaskPriority = mTaskPriority;
         return this;
+    }
+    public void lock() throws Exception{
+        lock.take();
+    }
+
+    public void unlock(){
+        lock.add(1);
     }
 
     @Override

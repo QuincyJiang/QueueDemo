@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bt2;
     Button bt3;
     Button bt4;
+    Button bt5;
     private ShowTaskQueue taskQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +26,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt2 = findViewById(R.id.bt_2);
         bt3 = findViewById(R.id.bt_3);
         bt4 = findViewById(R.id.bt_4);
+        bt5 = findViewById(R.id.bt_5);
         bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
         bt3.setOnClickListener(this);
         bt4.setOnClickListener(this);
+        bt5.setOnClickListener(this);
         taskQueue = ShowTaskQueue.getInstance();
         bt1.setOnClickListener(this);
     }
@@ -47,14 +50,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_4:
                 addlow();
                 break;
+            case R.id.bt_5:
+                task2.unlock();
+                break;
                 default:
         }
     }
+    ShowAlertTask task2;
     private void addImmediately(){
         new ShowAlertTask(taskQueue,this,"immediately","23333333",1).setPriority(TaskPriority.IMMEDIATELY).enqueue();
     }
     private void addHigh(){
-        new ShowAlertTask(taskQueue,this,"high","23333333",1).setPriority(TaskPriority.HIGH).enqueue();
+        task2 = (ShowAlertTask) (new ShowAlertTask(taskQueue,this,"high","23333333",1).setPriority(TaskPriority.HIGH));
+        task2.enqueue();
     }
     private void addmiddle(){
         new ShowAlertTask(taskQueue,this,"middle","23333333",1).setPriority(TaskPriority.DEFAULT).enqueue();

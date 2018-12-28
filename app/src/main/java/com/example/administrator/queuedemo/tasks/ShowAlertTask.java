@@ -34,7 +34,7 @@ public class ShowAlertTask extends BaseShowTask {
     @Override
     public void show() {
         super.show();
-        Log.d("ShowTask","Task is showing..."+toString());
+        Log.d("ShowAlertTask","Task is showing..."+toString());
     }
 
     @Override

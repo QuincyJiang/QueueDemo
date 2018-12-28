@@ -19,4 +19,6 @@ public interface IShowTask extends Comparable<IShowTask>{
     String toString();
     boolean getShowStatus();
     int getDuration();
+    void lock() throws Exception;
+    void unlock();
 }
